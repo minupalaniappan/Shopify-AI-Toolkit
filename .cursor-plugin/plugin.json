@@ -7,5 +7,7 @@
   "homepage": "https://shopify.dev/docs/apps/build/devmcp",
   "repository": "https://github.com/Shopify/Shopify-AI-Toolkit",
   "license": "MIT",
+  "mcpServers": "./.cursor-plugin/mcp.json",
+  "rules": "./rules/",
   "keywords": ["shopify", "mcp", "graphql", "liquid", "storefront", "admin-api"]
 }

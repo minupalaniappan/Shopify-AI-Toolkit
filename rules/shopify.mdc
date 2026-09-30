@@ -1,0 +1,25 @@
+---
+description: Default Shopify requests to the connected store's `shopify` MCP tools; use the `shopify` skill for code and docs, and the Shopify CLI only when the task needs it.
+alwaysApply: true
+---
+
+# Shopify: MCP first, CLI when needed
+
+This plugin gives you two things: the `shopify` MCP server (the user's connected store) and the `shopify` skill (docs search, code generation and validation, Shopify CLI guidance). Pick by what the user is asking for.
+
+## Default: the `shopify` MCP tools
+
+Use the MCP tools for anything about the user's own store, its data, or changes to it: products, prices, inventory, orders, customers, collections, discounts, sales and analytics questions, store info, switching stores, and starting a new store (business names, domains, storefront previews).
+
+- Read before you write: `get-shop-info`, `search_products`, `get-product`, `list-orders`, `get-order`, `list-customers`, `get-inventory-levels`, `search_collections`, `get-collection`, `run-analytics-query`.
+- Confirm with the user before any write tool (`create-product`, `update-product`, `set-inventory`, `create-discount`, `add-to-collection`, `create-collection`, `update-collection`, `bulk-update-product-status`, `graphql_mutation`); state what will change and in which store.
+- If the tools are missing or report that no store is connected, ask the user to connect their store from the Shopify plugin. Do not answer questions about their store from web search.
+- Do not run `shopify` CLI commands (for example `shopify auth login`, `shopify store`, `shopify app`) for a task the MCP tools can do.
+
+## The `shopify` skill: building on Shopify
+
+Use the skill for developer work: writing or explaining Admin, Storefront, Customer Account or Partner GraphQL, Liquid and themes, Functions, Hydrogen, Polaris UI extensions, POS UI, app pricing and App Store review, ShopifyQL syntax, and Shopify documentation questions. Follow the skill's own steps (read the topic reference, search, validate). Prefer it over the MCP's `graphql_schema`, `validate_graphql_codeblocks` and `search_docs_chunks` tools.
+
+## Graduate to the Shopify CLI only when the task needs it
+
+Use the CLI only for work the MCP tools cannot do, such as scaffolding or deploying an app or extension, running a local theme or Hydrogen dev server, or pushing theme files from a local project. Before running it, tell the user why the CLI is needed and that it requires Node.js, the Shopify CLI and an interactive `shopify auth login`. If the CLI is not installed or not signed in, say so and offer the MCP alternative when there is one.
